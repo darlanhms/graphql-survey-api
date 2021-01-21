@@ -8,7 +8,7 @@ import CreateUserInput from '../inputs/user/CreateUser';
 export default class UserResolver {
   @Query(() => User, { nullable: true })
   async user(@Arg('id') id: number): Promise<User | undefined> {
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findOne({ where: { id }, relations: ['surveys'] });
 
     return user;
   }
