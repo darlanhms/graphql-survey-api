@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+import Survey from './Survey';
 
 @ObjectType()
 @Entity()
@@ -18,4 +19,7 @@ export default class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Survey, survey => survey.user)
+  surveys: Array<Survey>;
 }
