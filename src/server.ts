@@ -1,18 +1,17 @@
 import 'reflect-metadata';
 import { GraphQLServer } from 'graphql-yoga';
+import { createConnection } from 'typeorm';
 
-const typeDefs = `
-  type Query {
-    hello(name: String): String!
-  }
-`;
+import createSchema from './schema';
 
-const resolvers = {
-  Query: {
-    hello: (_, { name }) => `Hello ${name || 'World'}`,
-  },
+const bootstrap = async () => {
+  await createConnection();
+
+  const schema = await createSchema();
+
+  const server = new GraphQLServer({ schema });
+
+  server.start(() => console.log('Server running on http://localhost:4000'));
 };
 
-const server = new GraphQLServer({ typeDefs, resolvers });
-
-server.start(() => console.log('Server running on http://localhost:4000'));
+bootstrap();
