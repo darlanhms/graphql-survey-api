@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Arg } from 'type-graphql';
 import { hash } from 'bcrypt';
 import User from '../entities/User';
 
-import CreateUserInput from '../inputs/user/createUser';
+import CreateUserInput from '../inputs/user/CreateUser';
 
 @Resolver()
 export default class UserResolver {
